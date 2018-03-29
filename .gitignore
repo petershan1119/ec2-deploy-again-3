@@ -1,5 +1,7 @@
 .media
 .secrets/
+.static
+
 # Created by https://www.gitignore.io/api/git,macos,python,django,pycharm+all
 
 ### Django ###
