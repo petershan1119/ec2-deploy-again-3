@@ -16,7 +16,7 @@ import json
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import raven
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 ROOT_DIR = os.path.dirname(BASE_DIR)
 
 STATIC_URL = '/static/'
@@ -33,21 +33,11 @@ STATICFILES_DIRS = [
 
 SECRETS_DIR = os.path.join(ROOT_DIR, '.secrets')
 SECRETS_BASE = os.path.join(SECRETS_DIR, 'base.json')
-
+SECRETS_LOCAL = os.path.join(SECRETS_DIR, 'local.json')
+SECRETS_DEV = os.path.join(SECRETS_DIR, 'dev.json')
 secrets_base = json.loads(open(SECRETS_BASE, 'rt').read())
-
 SECRET_KEY = secrets_base['SECRET_KEY']
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = [
-    'localhost',
-    '.amazonaws.com',
-]
-
-
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -64,9 +54,7 @@ INSTALLED_APPS = [
 ]
 
 RAVEN_CONFIG = {
-    'dsn': 'https://c4e5cd05ecc941418964fa2648c5c5e6:b9657eef32344edbb526526f46b1b5df@sentry.io/298196',
-    # If you are using git, you can also automatically configure the
-    # release based on the git info.
+    'dsn': secrets_base['RAVEN_DSN'],
     'release': raven.fetch_git_sha(os.path.abspath(os.pardir)),
 }
 
@@ -104,13 +92,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
