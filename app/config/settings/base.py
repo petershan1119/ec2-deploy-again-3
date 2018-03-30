@@ -39,7 +39,6 @@ SECRETS_PRODUCTION = os.path.join(SECRETS_DIR, 'production.json')
 secrets_base = json.loads(open(SECRETS_BASE, 'rt').read())
 SECRET_KEY = secrets_base['SECRET_KEY']
 
-
 AWS_ACCESS_KEY_ID = secrets_base['AWS_ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = secrets_base['AWS_SECRET_ACCESS_KEY']
 AWS_STORAGE_BUCKET_NAME = secrets_base['AWS_STORAGE_BUCKET_NAME']
